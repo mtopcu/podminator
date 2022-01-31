@@ -1,3 +1,4 @@
+from webbrowser import get
 from kubernetes import client, config
 import logging
 
@@ -8,11 +9,11 @@ def delete_pod(pod, core_v1_api):
                 body=client.V1DeleteOptions())
 
 
-def print_result(pods):
+def outline(pods):
     pod_number = len(pods)
+    print("\n" + "─" * 82)
+    print(f'There are {pod_number} pods on the Replica Sets and {pod_number//2} of the them are being TERMINATED!')
     print("─" * 82)
-    print(f' There are {pod_number} pods on the Replica Sets and {pod_number//2} of the them have been TERMINATED!')
-    print("─" * 82 + "\n")
 
 
 def main():
@@ -39,6 +40,7 @@ def main():
     pod_names = [i.metadata.name for i in pods.items]
 
     replica_set_pods = [pod for pod in pod_names if any(map(lambda each: each in pod, replica_set_names))]
+    outline(replica_set_pods)
 
     killing_pods = list()
 
@@ -50,8 +52,6 @@ def main():
             delete_pod(pod, core_v1_api)
 
         killing_pods = []
-
-    print_result(replica_set_pods)
 
 
 if __name__ == "__main__":
