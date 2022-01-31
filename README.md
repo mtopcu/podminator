@@ -5,8 +5,8 @@ Podminator is a small Kubernetes tool in order to terminate half of the pods dep
 Project has been developed by using Python3 and its' Kubernetes library. 
 To do the project up; clone the repo, get in it and run the commands below.
 ```
--   python3 -m venv env
--   source env/bin/activate
--   pip install -r requirements.txt
--  	python3 code/podminator.py
+- python3 -m venv env
+- source env/bin/activate
+- pip install -r requirements.txt
+- python3 code/podminator.py
 ```
